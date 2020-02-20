@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.sundongliang.mapper.ArticleMapper">
+  		
+  	<select id="list" resultType="com.sundongliang.entity.Article">
+  		select a.id,a.title,a.content,a.commentCnt,a.created,a.updated,u.username,a.user_id from cms_article a LEFT JOIN cms_user u on a.user_id = u.id
+  		where 1=1
+  			<if test="created1!=null and created1!=''">
+  				and a.created  &lt;#{created1}
+  			</if>
+  			<if test="created2!=null and created1!=''">
+  			and	a.created  > #{created2}
+  			</if>
+  			<if test="ReverseOrder!=null and ReverseOrder!=''">
+  			order by #{ReverseOrder} desc
+  			</if>
+  		
+  	</select>
+  </mapper>
